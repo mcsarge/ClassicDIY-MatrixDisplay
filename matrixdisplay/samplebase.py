@@ -3,9 +3,9 @@ import time
 import sys
 import os
 
-sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/../rpi-rgb-led-matrix/bindings/python'))
-#from rgbmatrix import RGBMatrix, RGBMatrixOptions
-from RGBMatrixEmulator import RGBMatrix, RGBMatrixOptions
+sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/../../rpi-rgb-led-matrix/bindings/python'))
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
+#from RGBMatrixEmulator import RGBMatrix, RGBMatrixOptions
 
 
 class SampleBase(object):
