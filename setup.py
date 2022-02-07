@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# Learn more: https://github.com/kennethreitz/setup.py
-
 from setuptools import setup, find_packages
 
 
@@ -12,13 +10,13 @@ with open('LICENSE') as f:
     license = f.read()
 
 setup(
-    name='sample',
+    name='matrixdisplay',
     version='0.1.0',
-    description='Sample package for Python-Guide.org',
+    description='Display for the ClassicDIY using RGB LED Matrix Display',
     long_description=readme,
-    author='Kenneth Reitz',
-    author_email='me@kennethreitz.com',
-    url='https://github.com/kennethreitz/samplemod',
+    author='Matt Sargent',
+    author_email='matthew.c.sargent@gmail.com',
+    url='https://github.com/mcsarge/ClassicDIY_MatrixDisplay',
     license=license,
     packages=find_packages(exclude=('tests', 'docs'))
 )

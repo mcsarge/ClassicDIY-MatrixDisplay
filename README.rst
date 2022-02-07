@@ -1,9 +1,8 @@
-Sample Module Repository
+ClassicDIY-MatrixDisplay Module Repository
 ========================
 
-This simple project is an example repo for Python projects.
+This project is used to dispay ClassicDIY information in an RGB LED Display.
 
-`Learn more <http://www.kennethreitz.org/essays/repository-structure-and-python>`_.
 
 ---------------
 
