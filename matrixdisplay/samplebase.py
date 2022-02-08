@@ -3,9 +3,9 @@ import time
 import sys
 import os
 
-sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/../../rpi-rgb-led-matrix/bindings/python'))
-from rgbmatrix import RGBMatrix, RGBMatrixOptions
-#from RGBMatrixEmulator import RGBMatrix, RGBMatrixOptions
+sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/../rpi-rgb-led-matrix/bindings/python'))
+#from rgbmatrix import RGBMatrix, RGBMatrixOptions
+from RGBMatrixEmulator import RGBMatrix, RGBMatrixOptions,graphics
 
 
 class SampleBase(object):
@@ -34,7 +34,7 @@ class SampleBase(object):
 
     def usleep(self, value):
         time.sleep(value / 1000000.0)
-
+        
     def run(self):
         print("Running")
 
@@ -57,7 +57,6 @@ class SampleBase(object):
         options.led_rgb_sequence = self.args.led_rgb_sequence
         options.pixel_mapper_config = self.args.led_pixel_mapper
         options.panel_type = self.args.led_panel_type
-
 
         if self.args.led_show_refresh:
           options.show_refresh_rate = 1

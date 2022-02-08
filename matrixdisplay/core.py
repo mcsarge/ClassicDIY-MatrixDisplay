@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from rgbmatrix import graphics
 from samplebase import SampleBase
 import math
 
@@ -13,6 +14,42 @@ def scale_col(val, lo, hi):
 
 def rotate(x, y, sin, cos):
     return x * cos - y * sin, x * sin + y * cos
+
+
+class RunText(SampleBase):
+    def __init__(self, *args, **kwargs):
+        super(RunText, self).__init__(*args, **kwargs)
+        self.parser.add_argument("-t", "--text", help="The text to scroll on the RGB LED panel", default="100%")
+
+    def run(self):
+        offscreen_canvas = self.matrix.CreateFrameCanvas()
+        font = graphics.Font()
+        smfont = graphics.Font()
+        font.LoadFont("../fonts/7x13.bdf")
+        smfont.LoadFont("../fonts/5x7.bdf")
+        textColor = graphics.Color(255, 255, 0)
+        pos = offscreen_canvas.width
+        my_text = self.args.text
+        soc_text = "S"
+
+        offscreen_canvas.Clear()
+        len = graphics.DrawText(offscreen_canvas, font, 1, offscreen_canvas.height, textColor, my_text)
+        left_start = offscreen_canvas.width-len-2
+        offscreen_canvas.Clear()
+        len = graphics.DrawText(offscreen_canvas, font, left_start, 15, textColor, my_text)
+        len = graphics.DrawText(offscreen_canvas, smfont, left_start-10, 6, textColor, soc_text)
+
+        offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
+
+        while True:
+#            offscreen_canvas.Clear()
+#            len = graphics.DrawText(offscreen_canvas, font, pos, 10, textColor, my_text)
+            pos -= 1
+            if (pos + len < 0):
+                pos = offscreen_canvas.width
+
+            time.sleep(0.05)
+#            offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
 
 class RotatingBlockGenerator(SampleBase):
@@ -67,6 +104,7 @@ class RotatingBlockGenerator(SampleBase):
 
 # Main function
 if __name__ == "__main__":
-    rotating_block_generator = RotatingBlockGenerator()
-    if (not rotating_block_generator.process()):
-        rotating_block_generator.print_help()
+#    program = RotatingBlockGenerator()
+    program = RunText()
+    if (not program.process()):
+        program.print_help()
