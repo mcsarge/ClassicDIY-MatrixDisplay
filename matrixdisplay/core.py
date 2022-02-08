@@ -28,18 +28,20 @@ class RunText(SampleBase):
         font = graphics.Font()
         smfont = graphics.Font()
         font.LoadFont("../fonts/7x13.bdf")
-        smfont.LoadFont("../fonts/5x7.bdf")
+        smfont.LoadFont("../fonts/4x6.bdf")
         textColor = graphics.Color(255, 255, 0)
         pos = offscreen_canvas.width
         my_text = self.args.text
-        soc_text = "S"
+        soc_text = ["S","O","C"]
 
         offscreen_canvas.Clear()
         len = graphics.DrawText(offscreen_canvas, font, 1, offscreen_canvas.height, textColor, my_text)
         left_start = offscreen_canvas.width-len-2
         offscreen_canvas.Clear()
-        len = graphics.DrawText(offscreen_canvas, font, left_start, 15, textColor, my_text)
-        len = graphics.DrawText(offscreen_canvas, smfont, left_start-10, 6, textColor, soc_text)
+        len = graphics.DrawText(offscreen_canvas, font, left_start, 10, textColor, my_text)
+        len = graphics.DrawText(offscreen_canvas, smfont, left_start-10, 6, textColor, soc_text[0])
+        len = graphics.DrawText(offscreen_canvas, smfont, left_start-10, 12, textColor, soc_text[1])
+        len = graphics.DrawText(offscreen_canvas, smfont, left_start-10, 18, textColor, soc_text[2])
 
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
