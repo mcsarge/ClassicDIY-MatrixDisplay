@@ -34,7 +34,7 @@ class RunText(SampleBase):
         pos = offscreen_canvas.width
         my_text = self.args.text
         soc_text = ["S","O","C"]
-        amp_text = "+ 33 Amps"
+        amp_text = "+33A"
 
         offscreen_canvas.Clear()
         len = graphics.DrawText(offscreen_canvas, font, 1, offscreen_canvas.height, textColor, my_text)
