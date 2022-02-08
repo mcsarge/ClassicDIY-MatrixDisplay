@@ -2,6 +2,8 @@
 from rgbmatrix import graphics
 from samplebase import SampleBase
 import math
+import time
+
 
 
 def scale_col(val, lo, hi):
