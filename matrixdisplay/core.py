@@ -29,7 +29,7 @@ class RunText(SampleBase):
         smfont = graphics.Font()
         font.LoadFont("../fonts/7x13.bdf")
         smfont.LoadFont("../fonts/4x6.bdf")
-        textColor = graphics.Color(255, 255, 0)
+        textColor = graphics.Color(255, 255, 255) #white?
         pos = offscreen_canvas.width
         my_text = self.args.text
         soc_text = ["S","O","C"]
