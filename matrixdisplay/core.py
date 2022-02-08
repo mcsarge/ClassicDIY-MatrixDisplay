@@ -40,8 +40,8 @@ class RunText(SampleBase):
         offscreen_canvas.Clear()
         len = graphics.DrawText(offscreen_canvas, font, left_start, 10, textColor, my_text)
         len = graphics.DrawText(offscreen_canvas, smfont, left_start-10, 6, textColor, soc_text[0])
-        len = graphics.DrawText(offscreen_canvas, smfont, left_start-10, 12, textColor, soc_text[1])
-        len = graphics.DrawText(offscreen_canvas, smfont, left_start-10, 18, textColor, soc_text[2])
+        len = graphics.DrawText(offscreen_canvas, smfont, left_start-6, 10, textColor, soc_text[1])
+        len = graphics.DrawText(offscreen_canvas, smfont, left_start-2, 14, textColor, soc_text[2])
 
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
