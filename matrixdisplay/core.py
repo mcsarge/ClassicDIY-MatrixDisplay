@@ -27,7 +27,7 @@ class RunText(SampleBase):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         font = graphics.Font()
         smfont = graphics.Font()
-        font.LoadFont("../fonts/7x13.bdf")
+        font.LoadFont("../fonts/7x13B.bdf")
         smfont.LoadFont("../fonts/6x9.bdf")
         textColor = graphics.Color(255, 255, 255) #white?
         ampColor = graphics.Color(255, 255, 0) #white?
@@ -45,7 +45,7 @@ class RunText(SampleBase):
         #len = graphics.DrawText(offscreen_canvas, smfont, left_start-6, 8, textColor, soc_text[1])
         #len = graphics.DrawText(offscreen_canvas, smfont, left_start-2, 10, textColor, soc_text[2])
         
-        len = graphics.DrawText(offscreen_canvas, smfont, left_start, 16, ampColor, amp_text)
+        len = graphics.DrawText(offscreen_canvas, smfont, left_start, 17, ampColor, amp_text)
     
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
