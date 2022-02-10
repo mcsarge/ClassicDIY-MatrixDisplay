@@ -3,7 +3,7 @@ from rgbmatrix import graphics
 from samplebase import SampleBase
 import math
 import time
-
+import numpy as np
 
 
 def scale_col(val, lo, hi):
@@ -28,26 +28,87 @@ class RunText(SampleBase):
         font = graphics.Font()
         smfont = graphics.Font()
         font.LoadFont("../fonts/7x13B.bdf")
-        smfont.LoadFont("../fonts/6x9.bdf")
+#        smfont.LoadFont("../fonts/tom-thumb.bdf")
+        smfont.LoadFont("../fonts/clR6x12.bdf")
         textColor = graphics.Color(255, 255, 255) #white?
         ampColor = graphics.Color(255, 255, 0) #white?
+        frameColor = graphics.Color(125, 0, 125) #
+
+        red = graphics.Color(255, 0, 0)
+        dimred = graphics.Color(125, 0, 0)
+        green = graphics.Color(0, 255, 0)
+        blue = graphics.Color(0, 0, 255)
+        white = graphics.Color(255, 255, 255)
+
         pos = offscreen_canvas.width
         my_text = self.args.text
         soc_text = ["S","O","C"]
         amp_text = "+33A"
 
+        currentData =np.array(
+                     [0, 0, 0, 0, -9.3, -10.9, -5.1,  0.0, 0.0,   0.0,
+                      12.6, 16.1,  16.9,  18.9,  22.5,  24.5, 25.6, 25.9, 27.0, 29.0,
+                      30.0, 26.3,  46.3,  54.5,  49.5,  43.0, 38.5, 35.0, 34.0,	33.0,
+		      33.0, 34.7])
+
+
+
         offscreen_canvas.Clear()
         len = graphics.DrawText(offscreen_canvas, font, 1, offscreen_canvas.height, textColor, my_text)
         left_start = offscreen_canvas.width-len-2
         offscreen_canvas.Clear()
-        len = graphics.DrawText(offscreen_canvas, font, left_start, 10, textColor, my_text)
+        len = graphics.DrawText(offscreen_canvas, font, left_start, 9, textColor, my_text)
         #len = graphics.DrawText(offscreen_canvas, smfont, left_start-10, 6, textColor, soc_text[0])
         #len = graphics.DrawText(offscreen_canvas, smfont, left_start-6, 8, textColor, soc_text[1])
         #len = graphics.DrawText(offscreen_canvas, smfont, left_start-2, 10, textColor, soc_text[2])
-        
-        len = graphics.DrawText(offscreen_canvas, smfont, left_start, 17, ampColor, amp_text)
-    
+
+        len = graphics.DrawText(offscreen_canvas, smfont, left_start, 18, green, amp_text)
+
+        graphOrigin = [left_start, 18] #remember 0,0 is top left corner
+        graphHeight = 32 - graphOrigin[1] - 1
+        graphWidth = 64-left_start-1
+        graphBottom = graphOrigin[1]+graphHeight
+
+
+        edgeSetback = (max(currentData[0:graphWidth]) - min(currentData[0:graphWidth])) * 0.05
+        maxCurrent = max(currentData[0:graphWidth]) + edgeSetback
+        minCurrent = min(currentData[0:graphWidth]) - edgeSetback
+        currentRange = maxCurrent - minCurrent
+
+
+        graphics.DrawLine(offscreen_canvas,
+           graphOrigin[0], graphOrigin[1],
+           graphOrigin[0], graphOrigin[1]+graphHeight, frameColor)
+        graphics.DrawLine(offscreen_canvas,
+           graphOrigin[0], graphOrigin[1]+graphHeight,
+           graphOrigin[0]+graphWidth, graphOrigin[1]+graphHeight, frameColor)
+
+        print("range:", currentRange, " edge:", edgeSetback, " max:", maxCurrent, " min:", minCurrent)
+
+        #Draw zero Line
+        if (minCurrent < 0):
+           percentOfRange = (0-minCurrent)/currentRange
+           y = int(round(graphBottom - (percentOfRange * graphHeight)))
+           print("Zero line:", y)
+           graphics.DrawLine(offscreen_canvas, graphOrigin[0], y, graphOrigin[0]+graphWidth, y, dimred)
+
+        #First Point
+        percentOfRange = (currentData[0]-minCurrent)/currentRange
+        y = int(round(graphBottom - (percentOfRange * graphHeight)))
+        offscreen_canvas.SetPixel(graphOrigin[0]+1, y, 0, 255, 0)
+        lasty = y
+
+        for x in range(1, graphWidth):
+           percentOfRange = (currentData[x]-minCurrent)/currentRange
+           y = int(round(graphBottom - (percentOfRange * graphHeight)))
+           print(currentData[x],percentOfRange*100, y)
+           graphics.DrawLine(offscreen_canvas, x+graphOrigin[0], lasty, x+graphOrigin[0]+1, y, green)
+           lasty = y
+
+
+
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
+
 
         while True:
 #            offscreen_canvas.Clear()
