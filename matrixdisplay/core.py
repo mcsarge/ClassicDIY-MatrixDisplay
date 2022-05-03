@@ -44,12 +44,19 @@ class RunText(SampleBase):
         blue = graphics.Color(0, 0, 255)
         white = graphics.Color(255, 255, 255)
         dimYellow = graphics.Color(0, 175, 175) #dimyellow?
-
         pos = offscreen_canvas.width
         my_text = self.args.text
         soc_text = ["S","O","C"]
         amp_text = "+33A"
         watts_text = "+1.2kW"
+
+        currentData =np.array(
+                     [0, 0, 0, 0, -9.3, -10.9, -5.1,  0.0, 0.0,   0.0,
+                      12.6, 16.1,  16.9,  18.9,  22.5,  24.5, 25.6, 25.9, 27.0, 29.0,
+                      30.0, 26.3,  46.3,  54.5,  49.5,  43.0, 38.5, 35.0, 34.0,	33.0,
+		      33.0, 34.7])
+
+
 
         currentData =np.array(
                      [0, 0, 0, 0, -9.3, -10.9, -5.1,  0.0, 0.0,   0.0,
