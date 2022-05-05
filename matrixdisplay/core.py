@@ -119,6 +119,7 @@ class RunText(SampleBase):
         offscreen_canvas.Clear()
         len = graphics.DrawText(offscreen_canvas, socfont, left_start, 9, socColor, my_text)
         len = graphics.DrawText(offscreen_canvas, ampsfont, left_start, 20, green, amp_text)
+        
         len = graphics.DrawText(offscreen_canvas, ampsfont, left_start, 32
                                 , wattsColor, watts_text)
 #        len = graphics.DrawText(offscreen_canvas, wattsfont, left_start, 25, wattsColor, watts_text)
